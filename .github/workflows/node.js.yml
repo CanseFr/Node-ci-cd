@@ -40,4 +40,4 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: cansefr/test_ci_cd:latest 
+        tags: cansefr/test_ci_cd:latest
