@@ -128,6 +128,8 @@ Cela va permettre de creer un fichier pour le lancement de test au moment d'un p
 
 
 
+Nous allons ajouter les reglees sur les branche pour que les parametre palcé dans le fichier dudessus concernant les branches soit appliqué. Un pull request et review et necessaire pour merge, et donc build image + docker push
+
 Github du projet > Sttings > branche > add rules > 
 
 Branche name pattern : main 
