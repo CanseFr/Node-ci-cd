@@ -302,4 +302,22 @@ Cliquez sur le bouton "Create" pour appliquer les règles.
 
 Avec ces règles en place, une pull request sera nécessaire pour fusionner des modifications dans la branche "main", et des avis de révision seront requis. Cela garantira que le processus de construction et de push de l'image Docker ne se déclenchera que lorsque ces conditions seront remplies, contribuant ainsi à maintenir un contrôle rigoureux sur les modifications apportées à la branche principale.
 
+#### Procédure
+
+Une fois que vous avez terminé de travailler sur une branche et que vous avez effectué un push vers le projet, suivez ces étapes :
+
+Ouvrez la pull request correspondante dans GitHub.
+
+Effectuez une revue de la branche et assurez-vous que les modifications sont conformes aux exigences.
+
+Validez la pull request.
+
+Fusionnez la pull request.
+
+Vérifiez Docker Hub pour constater la mise à jour de l'image.
+
+Cette procédure vous permettra de gérer efficacement les modifications de branche, de les valider et de surveiller la mise à jour de l'image Docker sur Docker Hub après la fusion.
+
+Evidement si la branche n'est pas validé, l'image sur le hub ne sera pas impacté, on peut constater l'echec d'execution des build dans les actions.
+
 
