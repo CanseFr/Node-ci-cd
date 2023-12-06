@@ -129,3 +129,9 @@ Cela va permettre de creer un fichier pour le lancement de test au moment d'un p
 
 
 Github du projet > Sttings > branche > add rules > 
+
+Branche name pattern : main 
+Require pull request before merging
+Require approvals
+
+
