@@ -8,11 +8,18 @@ Test
 Dockerfile
 Action
 
+Une fois leprojet en place nous allons creer une image et la tester avant de la push sur le repo
 
-```
+```zsh
 docker image build -t app_ci .  
-docker run --name=app_ci -d -p=3001:3000 app_ci   // Tester avant de push     
+docker run --name=app_ci -d -p=3001:3000 app_ci   //  
 ```
+
+```url
+http://localhost:3000
+>> Hello ! 
+```
+
 
 
 Action Git 
@@ -124,8 +131,89 @@ Nous allons retourner dans la racine du projet pour creer un nouveau ficher dans
 
 Cela va permettre de creer un fichier pour le lancement de test au moment d'un push et d'un pull request par contre le nouveau fichier lui va build une image et push sur le hub 
 
+#### node.js.yml
+
+Ici on peut constater que je supprime la partie de build et tous ce qui est en rapport a vec Docker, puis dans le on et pull request on a enlevé le push.
+
+*node.js..yml*
+```yaml
 
 
+name: Node.js CI
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.10]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test
+```
+
+#### push-docker.yml
+
+Ici sont les informations necessaire au build de l'image et au pish sur le docker hub, avec le on push main qui va excutrer cette action si le code est push sur la branche main
+
+*push-docker.yml*
+```yaml
+
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.10]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run build --if-present
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build and push
+      uses: docker/build-push-action@v5
+      with:
+        push: true
+        tags: cansefr/test_ci_cd:latest
+```
 
 
 Nous allons ajouter les reglees sur les branche pour que les parametre palcé dans le fichier dudessus concernant les branches soit appliqué. Un pull request et review et necessaire pour merge, et donc build image + docker push
