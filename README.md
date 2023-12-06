@@ -1,5 +1,9 @@
 # Node-ci-cd
 
+Ici nous allons creer une application tres simple qui effectu un test, puis trigger les actions github pour lancer les test puis build une image qui va etre push sur notre repository DockerHub.
+
+On va eglament creer deux repository secret pour y stocker notre toekn d'accée docker ainsi que ntore nom de user pour pouvoir push sur docker hub grace a l'action
+
 Test
 Dockerfile
 Action
@@ -113,3 +117,15 @@ jobs:
 ```
 
 Git action > new workflow > Docker image 
+
+
+
+Nous allons retourner dans la racine du projet pour creer un nouveau ficher dans le repertoir github/workflow *push-docker.yml*
+
+Cela va permettre de creer un fichier pour le lancement de test au moment d'un push et d'un pull request par contre le nouveau fichier lui va build une image et push sur le hub 
+
+
+
+
+
+Github du projet > Sttings > branche > add rules > 
