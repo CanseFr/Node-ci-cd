@@ -4,8 +4,7 @@ Dans ce guide, nous allons créer une application Node.js très simple qui effec
 
 Nous allons également mettre en place deux secrets de dépôt pour stocker notre token d'accès Docker et notre nom d'utilisateur DockerHub. Ces informations sont essentielles pour permettre le push de notre image vers Docker Hub grâce à l'action GitHub.
 
-Étapes
-Les étapes de ce processus incluent :
+## Les étapes de ce processus incluent :
 
 App
 Test
@@ -26,7 +25,7 @@ Ce processus automatisé garantit que votre application Node.js est testée, con
 
 
 
-#### Configuration de l'Action Git
+## Configuration de l'Action Git
 Nous allons maintenant configurer l'action Git pour l'intégration continue de notre application Node.js. Voici le fichier de configuration YAML associé à cette action :
 
 Pour obtenir ce fichier aller dans Git action > new workflow > et chercher  'Docker image '
@@ -68,7 +67,7 @@ L'action utilise la version Node.js spécifiée dans la matrice (dans cet exempl
 N'oubliez pas de valider et de commit ce fichier de configuration dans votre dépôt Git pour activer l'intégration continue de votre application Node.js et de pull dans votre IDE pour eviter les conflits.
 
 
-#### Generer clé d'accées sur dockerHub
+## Generer clé d'accées sur dockerHub
 
 - Pour générer la clé d'accès à Docker Hub, suivez ces étapes :
 
@@ -89,7 +88,7 @@ Connectez-vous à votre compte Docker Hub.
 Maintenant que vous avez votre jeton d'accès Docker Hub, vous pouvez l'utiliser dans votre workflow GitHub.
 
 
-#### Configuration des Secrets et des Variables
+## Configuration des Secrets et des Variables
 
 Pour configurer les secrets nécessaires à votre workflow GitHub, suivez ces étapes :
 
@@ -118,11 +117,11 @@ Note : Assurez-vous de garder ces informations secrètes et de ne pas les partag
 Vous avez maintenant configuré les secrets nécessaires pour permettre à votre workflow GitHub d'accéder à Docker Hub.
 
 
-#### Configuration node.js.yaml file
+## Configuration node.js.yaml file
 
 Accédez à l'application, ouvrez le fichier node.js.yaml du workflow, puis ajoutez une nouvelle tâche (étape) :
 
-*node.js.yaml*
+**node.js.yaml**
 ```yaml
 name: Node.js CI
 
@@ -174,7 +173,7 @@ Dans le prochain chapitre, nous allons aborder la séparation de la phase de tes
 
 Checker rules branche etc ...
 
-#### node.js.yml
+## node.js.yml
 
 Nous allons retourner dans la racine du projet pour creer un nouveau ficher dans le repertoir github/workflow *push-docker.yml*
 
@@ -184,7 +183,7 @@ Tandis que le push lui build une image et push sur le hub. (d'ou la necessite de
 
 On peut constater la separations dans les deux fichiers qui suivent.
 
-*node.js..yml*
+**node.js..yml**
 ```yaml
 name: Node.js CI
 
@@ -262,16 +261,6 @@ jobs:
 ```
 
 
-Un pull request et review et necessaire pour merge, et donc build image + docker push
-
-Github du projet > Settings > branche > add rules > 
-
-Branche name pattern : main 
-Require pull request before merging
-Require approvals
-
-____
-
 Nous allons maintenant définir des règles pour les branches afin d'appliquer les paramètres que nous avons définis dans le fichier précédent concernant les branches.
 
 Voici comment vous pouvez le faire :
@@ -302,7 +291,7 @@ Cliquez sur le bouton "Create" pour appliquer les règles.
 
 Avec ces règles en place, une pull request sera nécessaire pour fusionner des modifications dans la branche "main", et des avis de révision seront requis. Cela garantira que le processus de construction et de push de l'image Docker ne se déclenchera que lorsque ces conditions seront remplies, contribuant ainsi à maintenir un contrôle rigoureux sur les modifications apportées à la branche principale.
 
-#### Procédure
+## Procédure
 
 Une fois que vous avez terminé de travailler sur une branche et que vous avez effectué un push vers le projet, suivez ces étapes :
 
